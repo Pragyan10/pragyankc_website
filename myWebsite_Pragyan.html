@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pragyan K C — PhD Candidate, UTSA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --cream:   #f7f4ee;
+      --ink:     #1a1916;
+      --muted:   #6b6760;
+      --accent:  #c0392b;
+      --rule:    #d8d3c8;
+      --hover-bg:#efebe2;
+      --max:     860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.75rem 0;
+    }
+    nav .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    nav .brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    header {
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    header .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    header .title-line {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    header .bio {
+      max-width: 680px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #3a3835;
+      margin-bottom: 2rem;
+    }
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid var(--rule);
+      border-radius: 2rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: #fdf0ef;
+    }
+    .pill svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* ── Section ── */
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Research ── */
+    .research-text {
+      max-width: 680px;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #3a3835;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--hover-bg);
+      border-radius: 3px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Education ── */
+    .edu-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .edu-item:last-child { border-bottom: 1px solid var(--rule); }
+    .edu-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding-top: 0.15rem;
+    }
+    .edu-degree {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .edu-school {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+    .edu-gpa {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-top: 0.3rem;
+    }
+
+    /* ── Publications ── */
+    .pub-list { list-style: none; }
+    .pub-item {
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem 1.5rem;
+      align-start: start;
+    }
+    .pub-item:last-child { border-bottom: 1px solid var(--rule); }
+    .pub-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+    .pub-authors strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .pub-link {
+      align-self: start;
+      margin-top: 0.15rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      border-radius: 3px;
+      padding: 0.25rem 0.6rem;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+    .pub-link:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* ── Experience ── */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 2rem;
+      padding: 1.2rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .exp-item:last-child { border-bottom: 1px solid var(--rule); }
+    .exp-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-top: 0.1rem;
+    }
+    .exp-role {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+    .exp-org {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ── Awards ── */
+    .award-list { list-style: none; }
+    .award-item {
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 0 0.8rem;
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--rule);
+      font-size: 0.92rem;
+      align-items: start;
+    }
+    .award-item:last-child { border-bottom: 1px solid var(--rule); }
+    .award-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.55rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Service ── */
+    .service-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 3rem;
+    }
+    .service-group h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+    .service-list { list-style: none; }
+    .service-list li {
+      font-size: 0.88rem;
+      padding: 0.35rem 0;
+      border-top: 1px solid var(--rule);
+      color: #3a3835;
+    }
+    .service-list li:last-child { border-bottom: 1px solid var(--rule); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .edu-item, .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+      .pub-item { grid-template-columns: 1fr; }
+      .service-cols { grid-template-columns: 1fr; }
+      .edu-year, .exp-year { font-size: 0.68rem; color: var(--accent); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="inner">
+      <a class="brand" href="#">pragyan k c</a>
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Papers</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#service">Service</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── Hero ── -->
+    <header>
+      <p class="eyebrow">PhD Candidate · Computer Science</p>
+      <h1>Pragyan K C</h1>
+      <p class="title-line">University of Texas at San Antonio</p>
+      <p class="bio">
+        I am a PhD candidate in the Computer Science department at UTSA, advised by Dr. Mitra Bokaei Hosseini.
+        My work lives at the intersection of software engineering, requirements engineering, and natural
+        language processing — with a focus on improving how software requirements are elicited, analyzed,
+        and traced across the development lifecycle.
+      </p>
+      <div class="contact-pills">
+        <!-- Replace # with actual mailto and profile links -->
+        <a class="pill" href="mailto:pragyan.kc@utsa.edu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          pragyan.kc@utsa.edu
+        </a>
+        <a class="pill" href="https://www.linkedin.com/in/pragyankc/" target="_blank" rel="noopener">
+          <!-- ADD: Replace href with your actual LinkedIn URL -->
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="pill" href="https://github.com/Pragyan10" target="_blank" rel="noopener">
+          <!-- ADD: Replace href with your actual GitHub URL -->
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a class="pill" href="CV-Pragyan-Spring2026.pdf" target="_blank">
+          <!-- ADD: Place your CV PDF in the same folder as this file -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          CV
+        </a>
+      </div>
+    </header>
+
+    <!-- ── Research Interests ── -->
+    <section id="research">
+      <p class="section-label">01 — Research Interests</p>
+      <p class="research-text">
+        My research aims to improve the quality and effectiveness of software requirements to better support
+        the development of reliable and trustworthy systems. I leverage diverse requirement types — user
+        scenarios, privacy policies, feature requests — to trace and connect software artifacts throughout
+        the development lifecycle.
+      </p>
+      <div class="tags">
+        <span class="tag">Software Engineering</span>
+        <span class="tag">Requirements Engineering</span>
+        <span class="tag">Natural Language Processing</span>
+        <span class="tag">Privacy Policies</span>
+        <span class="tag">Feature Requests</span>
+        <span class="tag">LLMs</span>
+        <span class="tag">Traceability</span>
+      </div>
+    </section>
+
+    <!-- ── Education ── -->
+    <section id="education">
+      <p class="section-label">02 — Education</p>
+      <div class="edu-item">
+        <div class="edu-year">2022 – Present</div>
+        <div>
+          <div class="edu-degree">Ph.D. Candidate, Computer Science</div>
+          <div class="edu-school">University of Texas at San Antonio</div>
+          <div class="edu-gpa">GPA 3.98 &nbsp;·&nbsp; Interim M.S. expected Spring 2026</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2018 – 2022</div>
+        <div>
+          <div class="edu-degree">B.S., Computer Science — Data Science Track</div>
+          <div class="edu-school">St. Mary's University, San Antonio, Texas</div>
+          <div class="edu-gpa">Cumulative GPA 3.98 &nbsp;·&nbsp; Major GPA 4.0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Publications ── -->
+    <section id="publications">
+      <p class="section-label">03 — Publications</p>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">Demystifying Feature Requests: Leveraging LLMs to Refine Feature Requests in Open-Source Software</div>
+            <div class="pub-venue">IEEE International Requirements Engineering Conference (RE), 2025</div>
+            <div class="pub-authors"><strong>Pragyan K C</strong>, Rambod Ghandiparsi, Thomas Herron, John Heaps, Mitra Bokaei Hosseini</div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11190351" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">Towards Better Requirements from the Crowd: Developer Engagement with Feature Requests in Open Source Software</div>
+            <div class="pub-venue">CrowdRE Workshop at IEEE RE, 2025</div>
+            <div class="pub-authors"><strong>Pragyan K C</strong>, Rambod Ghandiparsi, Thomas Herron, John Heaps, Mitra Bokaei Hosseini</div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11190239" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">Toward Regulatory Compliance: A Few-Shot Learning Approach to Extract Processing Activities</div>
+            <div class="pub-venue">IEEE RE Workshops (REW), pp. 241–250, 2024</div>
+            <div class="pub-authors"><strong>Pragyan K C</strong>, Rambod Ghandiparsi, Rocky Slavin, Sepideh Ghanavati, Travis Breaux, Mitra Bokaei Hosseini</div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10628578" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">Requirements Copilot: Ambiguity Management in Feature Requests</div>
+            <div class="pub-venue">IEEE RE Conference, pp. 571–519, 2024</div>
+            <div class="pub-authors"><strong>Pragyan K C</strong></div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10628469" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">A Large-Language-Model Approach to Code and Privacy Policy Alignment</div>
+            <div class="pub-venue">IEEE SANER, pp. 79–90, 2024</div>
+            <div class="pub-authors">Gabriel Morales, <strong>Pragyan K C</strong>, Sadia Jahan, Mitra Bokaei Hosseini, Rocky Slavin</div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/10589797" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+        <li class="pub-item">
+          <div>
+            <div class="pub-title">Identifying and Classifying Third-Party Entities in Natural Language Privacy Policies</div>
+            <div class="pub-venue">Workshop on Privacy in NLP (PrivacyNLP) at EMNLP, pp. 18–27, 2020</div>
+            <div class="pub-authors">Mitra Bokaei Hosseini, <strong>Pragyan KC</strong>, Irwin Reyes, Serge Eagleman</div>
+          </div>
+          <!-- ADD: Replace # with the actual paper URL -->
+          <a class="pub-link" href="https://aclanthology.org/2020.privatenlp-1.3/" target="_blank" rel="noopener">PDF ↗</a>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- ── Experience ── -->
+    <section id="experience">
+      <p class="section-label">04 — Experience</p>
+
+      <div class="exp-item">
+        <div class="exp-year">Fall 2025 –<br>Spring 2026</div>
+        <div>
+          <div class="exp-role">Instructor / TA II</div>
+          <div class="exp-org">CS 2113 Object Oriented Programming &amp; CS 3343 Application Programming · UT San Antonio</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-year">Fall 2022 –<br>Spring 2025</div>
+        <div>
+          <div class="exp-role">Research Assistant I/II</div>
+          <div class="exp-org">Data Driven Software Engineering Lab · UT San Antonio</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-year">Summer 2023</div>
+        <div>
+          <div class="exp-role">Graduate Research Intern</div>
+          <div class="exp-org">International Computer Science Institute (ICSI), affiliated with UC Berkeley<br>
+          <span style="font-size:0.82rem;color:var(--muted);">Collaborating with Dr. Primal Wijesekera</span></div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-year">Fall 2020 –<br>Fall 2021</div>
+        <div>
+          <div class="exp-role">Undergraduate Research Assistant</div>
+          <div class="exp-org">St. Mary's University, San Antonio, Texas</div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-year">Summer 2020</div>
+        <div>
+          <div class="exp-role">Summer Undergraduate Research Fellow (SURF)</div>
+          <div class="exp-org">St. Mary's University · Collaborating with Dr. Mitra Bokaei Hosseini</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Awards ── -->
+    <section id="awards">
+      <p class="section-label">05 — Awards &amp; Honors</p>
+      <ul class="award-list">
+        <li class="award-item"><div class="award-dot"></div><span>UTSA Graduate Student Professional Development Award ($750) — RE 2025</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>UTSA Graduate Student Professional Development Award ($750) — SANER 2024</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Best Poster, 2nd Place — "Towards Regulatory Compliance", Los Datos Conference, Fall 2024</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Best Poster, 3rd Place — "Feature Request Apprentice", Los Datos Conference, Fall 2024</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Presidential Award — Service, Leadership &amp; Academic Excellence, St. Mary's University, Spring 2022</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Outstanding Senior, Computer Science — St. Mary's University, Spring 2022</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Best Senior Project — "Blood Bank Nepal", Semi Annual CS Symposium, Spring 2022</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Best Poster, 1st Place — "Rattler Exchange", Semi Annual CS Symposium, Spring 2021</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>Best Poster, 2nd Place — "Automated Third-Party Name Elicitation from NLP", Annual Research Showcase, Spring 2021</span></li>
+        <li class="award-item"><div class="award-dot"></div><span>St. Mary's University SURF Award ($2,000) — Summer 2020</span></li>
+      </ul>
+    </section>
+
+    <!-- ── Service ── -->
+    <section id="service">
+      <p class="section-label">06 — Service &amp; Leadership</p>
+      <div class="service-cols">
+        <div class="service-group">
+          <h3>Program Committee</h3>
+          <ul class="service-list">
+            <li>CrowdRE Workshop, RE 2026</li>
+            <li>RE@Next, RE 2026</li>
+            <li>ESPRE Workshop, RE 2025</li>
+            <li>AIRE Workshop, RE 2025</li>
+          </ul>
+        </div>
+        <div class="service-group">
+          <h3>Institutional Roles</h3>
+          <ul class="service-list">
+            <li>PhD Advisory Committee, UTSA (Spring 2026)</li>
+            <li>HSC Student Career Planning Working Group, UTSA (Fall 2025)</li>
+            <li>President, Nepalese Student Association, UTSA (2025–2026)</li>
+            <li>President, CS Graduate Student Association, UTSA (2023–2024)</li>
+            <li>New Computing College Task Force, UTSA (Spring 2024)</li>
+            <li>Student Volunteer, IEEE RE 2025</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.page -->
+
+  <footer>
+    <div class="page">
+      <p>© 2026 Pragyan K C</p>
+    </div>
+  </footer>
+
+</body>
+</html>
